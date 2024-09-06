@@ -3,12 +3,24 @@
 
 using namespace std;
 
-void test(string name = "test") {
-  cout << name << endl;
-}
+class Base {
+  public:
+    void test() {
+      cout << "base test" << endl;
+    }
+};
+
+class Child : public Base {
+  public:
+    void test() {
+      cout << "child test" << endl;
+    }
+};
 
 int main() {
-  test();
+  Base* obj = new Child;
+  obj->test();
+  delete obj;
 
   return 0;
 }

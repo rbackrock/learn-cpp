@@ -4,17 +4,17 @@
 using namespace std;
 
 class Student {
-  private:
-    string name;
+private:
+  string name;
 
-  public:
-    void setName(string name) {
-      this->name = name;
-    }
+public:
+  void setName(string name) {
+    this->name = name;
+  }
 
-    string getName() {
-      return this->name;
-    }
+  string getName() {
+    return this->name;
+  }
 
   Student() {
     cout << "构造函数执行" << endl;
@@ -35,12 +35,13 @@ void showStudent(Student& stu) {
 }
 
 class Exmaple1 {
+private:
   static int totalObject;
 
-  public:
-    static void showTotalObject() {
-      cout << format("数量总数为{}", totalObject) << endl;
-    }
+public:
+  static void showTotalObject() {
+    cout << format("数量总数为{}", totalObject) << endl;
+  }
 
   Exmaple1() {
     ++totalObject;
