@@ -48,7 +48,7 @@ private:
 
 public:
   // 此为纯虚函数
-  virtual void setSkeletalMesh() = 0;
+  virtual void print() = 0;
 
   void setName(string _name) {
     this->name = _name;
@@ -82,8 +82,8 @@ public:
   Rifle(string _name, int _ammon) : GunBase(_name, _ammon){
   }
 
-  virtual void setSkeletalMesh() override {
-    cout << format("执行了Rifle的setSkeletalMesh方法，武器名称为{}子弹数为{}",this->getName(), this->getAmmo()) << endl;
+  virtual void print() override {
+    cout << format("执行了Rifle的print方法，武器名称为{}子弹数为{}",this->getName(), this->getAmmo()) << endl;
   }
 
   virtual void fire() override {
@@ -104,7 +104,7 @@ int main() {
   delete obj;
 
   Rifle* mp5 = new Rifle("mp5冲锋枪", 30);
-  mp5->setSkeletalMesh(); // 执行了Rifle的setSkeletalMesh方法，武器名称为mp5冲锋枪子弹数为30
+  mp5->print(); // 执行了Rifle的setSkeletalMesh方法，武器名称为mp5冲锋枪子弹数为30
   mp5->fire(); // Rifle 的mp5冲锋枪武器开
   delete mp5;
 
@@ -112,8 +112,14 @@ int main() {
    * 智能指针的写法
    */
   unique_ptr<Rifle> wuzi_ptr = make_unique<Rifle>("乌兹冲锋枪", 99);
-  wuzi_ptr->setSkeletalMesh(); // 执行了Rifle的setSkeletalMesh方法，武器名称为乌兹冲锋枪子弹数为99
+  wuzi_ptr->print(); // 执行了Rifle的setSkeletalMesh方法，武器名称为乌兹冲锋枪子弹数为99
   wuzi_ptr->fire(); // Rifle 的乌兹冲锋枪武器开火
+
+  GunBase* g1 = new Rifle("G1冲锋枪", 30);
+  g1->print();
+  // 下面这行代码报错，因为指针指向父类，但是实例化的为子类，只能调用父类有的方法
+  // g1->fire();
+  delete g1;
 
   return 0;
 }
