@@ -40,7 +40,14 @@ int main() {
   cout << format("name={}, value={}", player1.getName(), player1.getValue()) << endl;
 
   PlayerInfo<PlayerInfo<int>> player2 = { "alex", player1 };
-  // cout << format("外部name={}, 外部value={}, 内部name={}, 内部value={}", player2.getName(), player2.getValue(), player2.getValue().getName(), player2.getValue().getValue()) << endl;
+  cout <<
+    format(
+      "外部name={} 内部name={} 内部val={}",
+      player2.getName(),
+      player2.getValue().getName(),
+      player2.getValue().getValue()
+    )
+  << endl;
 
   return 0;
 }
