@@ -5,23 +5,34 @@
 
 using namespace std;
 
-void print(vector<int> v) {
-  for (auto element : v) {
-    cout << element << endl;
-  }
-
-  cout << "---------------" << endl;
+/**
+ * 简单模版方法
+ */
+template<typename T>
+T addFn(T v1, T v2) {
+  return v1 + v2;
 }
 
+/**
+ * 模版类
+ */
+template<typename T, int N>
+class Array {
+private:
+  T m_array[N];
+
+public:
+  T getSize() {
+    return N;
+  }
+};
+
 int main() {
-  vector<int> v1 = { 3, 6, 9 };
-  print(v1);
-  reverse(v1.begin(), v1.end());
-  print(v1);
-  v1.pop_back();
-  print(v1);
-  v1.push_back(3);
-  print(v1);
+  cout << addFn<int>(2, 9) << endl;
+  cout << addFn<float>(0.2f, 0.9f) << endl;
+
+  Array<int, 2> arr;
+  cout << arr.getSize() << endl;
 
   return 0;
 }
