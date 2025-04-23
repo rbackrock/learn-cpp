@@ -47,6 +47,7 @@ public:
     ++totalObject;
   }
 };
+// 类静态变量需要在类外进行初始化
 int Exmaple1::totalObject = 0;
 
 int main() {
