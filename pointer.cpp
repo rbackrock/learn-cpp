@@ -1,9 +1,16 @@
 #include <iostream>
 #include <format>
+#include <memory>
 
 using namespace std;
 
 int main() {
+  int n { 3 };
+  int* n_ptr = &n;
+  int nValue = *n_ptr;
+  cout << "n的指针值为" << n_ptr << endl; // 0x...
+  cout << format("n的指针变量取值以后的结果值为{}", nValue) << endl; // 3
+
   int* p_ptr = new int;
   *p_ptr = 3;
   cout << format("在堆申请的指针变量p的赋的值是{}", *p_ptr) << endl;
