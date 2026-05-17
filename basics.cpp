@@ -40,26 +40,39 @@ int main() {
   cout << format("val的引用变量val_copy引用会改变val，结果为{}", val) << endl; // 9
 
   /**
-   * const 技巧，通过看 const 修饰的左边是什么
-   * 也可以通过顶层 const (top-level const) 来表示指针自身是常量，
-   * 而底层 const (low-level const) 则表示指针指向的值是常量
-   * 从右往左阅读 const 修饰的内容，依次是顶层 const 和底层 const
-   **/
-  int *const p1 = new int; // 不能重新指向其他指针
-  int const* p2 = new int; // 不能修改指针指向的值
-  int const *const p3 = new int; // 不能修改指针自身的值，也不能修改指针指向的值
+   * 结构化绑定，其实相当于 JavaScript 中的解构
+   */
+  // 数组
+  array structuringArr1 { 1, 2 };
+  auto [ sa1, sa2 ] { structuringArr1 };
+  cout << format("sa1={},sa2={}", sa1, sa2) << endl;
+  // 结构体
+  struct structuringPoint { double x, y, z; };
+  structuringPoint sp1;
+  sp1.x = 1.0; sp1.y = 2.0; sp1.z = 9.0;
+  auto [ sp1x, sp1y, sp1z ] { sp1 };
+  cout << format("sp1x={},sp1y={},sp1z={}", sp1x, sp1y, sp1z) << endl;
 
   /**
-   * 上面是一般教材的说法，这里是自己的理解，核心在于看 const 所处的位置
+   * for 范围循环的完成用法，有一个初始化器
    */
-  // 普通的赋值语句
-  int* p1 = new int { 2 };
-  // const 之后是 p2, p2 是指针变量，所以不能对 p2 指针赋值
-  int* const p2 = new int { 2 };
-  // const 之后是 int* 相当于指针指向的值，所以不能对 p4 指针指向的值赋值
-  const int* p4 = new int { 2 };
-  // const 最左边这种写法还有一种等价的写法是 p5 这样
-  int const * p5 = new int { 2 };
+  // arr1 作用域为循环体内
+  for (array arr1 { 1, 2 }; auto &it : arr1) {
+    cout << it << endl;
+  }
+
+  /**
+   * 指派初始化器(结构体)C++20支持，非常简洁
+   */
+  struct struct_dz {
+    int x;
+    int y;
+  };
+  struct_dz sd1 {
+    .x = 1,
+    .y = 2
+  };
+  cout << format("x={},y={}", sd1.x, sd1.y) << endl;
 
   return 0;
 }
